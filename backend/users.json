@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1781185399164,
+    "name": "منال خيري",
+    "email": "manalkhairy110@gmail.com",
+    "password": "Manal1234#",
+    "religiousData": {
+      "streak": 1,
+      "lastCompletedDate": null,
+      "quranPageTarget": null,
+      "challenge30Days": [],
+      "totalTasbeeh": 0,
+      "dailyHabits": {
+        "fajr": false,
+        "prayers": false,
+        "azkar": false,
+        "quran": false
+      },
+      "watchedVideos": [],
+      "tasbeehCurrent": 0,
+      "tasbeehTotal": 0
+    }
+  },
+  {
+    "id": 1783601570508,
+    "name": "يوسف ربيع",
+    "email": "youssefrabie122@gmail.com",
+    "password": "Youssef1234#",
+    "religiousData": {
+      "streak": 0,
+      "lastCompletedDate": null,
+      "quranPageTarget": null,
+      "challenge30Days": [],
+      "totalTasbeeh": 0,
+      "dailyHabits": {
+        "fajr": false,
+        "prayers": false,
+        "azkar": false,
+        "quran": false
+      },
+      "watchedVideos": []
+    }
+  }
+]

@@ -1,0 +1,509 @@
+/* ==========================================================================
+   1. الإعدادات العامة والمتغيرات (Reset & Variables)
+   ========================================================================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* يمنع السكرول الجانبي نهائياً */
+}
+
+:root {
+    --main-color: #5ebbdf;
+    --secondary-color: #2c3e50;
+    --text-color: #555;
+    --bg-color: #f9f9f9;
+    --card-bg: #ffffff;
+    --border-color: #eee;
+    --transition-speed: 0.3s;
+}
+
+/* 🌙 ثيم الوضع الليلي (Dark Theme) */
+body.dark-theme {
+    --bg-color: #0f172a;       
+    --card-bg: #1e293b;       
+    --text-color: #94a3b8;     
+    --secondary-color: #f8fafc;
+    --border-color: #334155;   
+    
+    background-color: var(--bg-color) !important;
+    color: var(--secondary-color);
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. الحاويات الرئيسية (Main Containers)
+   ========================================================================== */
+/* الحاوية الخارجية الكبرى للقسم */
+.auth-section-wrapper {
+    min-height: calc(100vh - 80px);
+    padding-top: 100px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    transition: background-color var(--transition-speed);
+}
+
+/* حاوية النماذج الرئيسية المثبتة الأبعاد */
+.auth-container {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    width: 900px;
+    max-width: 95%;
+    min-height: 580px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+/* ==========================================================================
+   3. تنسيق النماذج وحقول الإدخال (Forms & Inputs)
+   ========================================================================== */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%; /* تأخذ نصف الحاوية بالضبط في العرض المكتبي */
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+form {
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+    justify-content: center;
+    text-align: right;
+    transition: background-color var(--transition-speed);
+}
+
+.auth-logo-icon {
+    font-size: 32px;
+    color: var(--main-color);
+    margin-bottom: 5px;
+}
+
+.form-container h2 {
+    font-family: 'Reem Kufi', sans-serif;
+    color: var(--secondary-color);
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.form-container .subtitle {
+    color: var(--text-color);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* التفاعل الذكي لحقول الإدخال */
+.input-group {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border-color);
+    background: transparent;
+    border-radius: 6px;
+    outline: none;
+    color: var(--secondary-color);
+    font-size: 15px;
+    transition: border-color var(--transition-speed);
+}
+
+.input-group input:focus {
+    border-color: var(--main-color);
+}
+
+.input-group label {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    pointer-events: none;
+    transition: 0.3s ease;
+    background-color: var(--card-bg);
+    padding: 0 5px;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 12px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. الأزرار والروابط (Buttons & Links)
+   ========================================================================== */
+.forget-password {
+    color: var(--text-color);
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: fit-content;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.forget-password:hover {
+    color: var(--main-color);
+}
+
+/* زر إرسال النماذج الرئيسي المتدرج */
+.auth-submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Cairo', sans-serif;
+    color: #ffffff;
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 6px -1px rgba(56, 189, 248, 0.2), 0 2px 4px -1px rgba(56, 189, 248, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.auth-submit-btn:hover {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(2, 132, 199, 0.3);
+}
+
+.auth-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* زر الموبايل فقط (يختفي في الشاشات الكبيرة تلقائياً) */
+.mobile-only-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1.5px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+}
+
+.mobile-only-btn:hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+@media (min-width: 769px) {
+    .mobile-only-btn {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   5. إعدادات اللوحات الافتراضية (Desktop Panels Layout)
+   ========================================================================== */
+/* لوحة تسجيل الدخول تكون في النصف الأيمن */
+.sign-in-container {
+    right: 0;
+    z-index: 2;
+    opacity: 1;
+}
+
+/* لوحة إنشاء الحساب تكون في الخلف وتنتظر التفعيل */
+.sign-up-container {
+    right: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* 🔒 لوحة استعادة كلمة المرور */
+.forgot-container {
+    right: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* حاوية الأوفرلاي الترحيبية الثابتة في النصف الأيسر */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* الخلفية المتدرجة للأوفرلاي */
+.overlay {
+    background: linear-gradient(135deg, #1c2434 0%, #2c3e50 100%);
+    color: #ecf0f1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* اللوحات النصية الداخلية للأوفرلاي */
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* الحالة الافتراضية للغطاء */
+.overlay-right { display: flex; }
+.overlay-left { display: none; }
+.overlay-forgot { display: none; }
+
+/* نصوص وأزرار داخل الغطاء الملون */
+.overlay-panel h3 {
+    font-family: 'Reem Kufi', sans-serif;
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.overlay-panel p {
+    font-size: 14px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    color: #cbd5e1;
+}
+
+.overlay-switch-btn {
+    background: transparent !important;
+    border: 2px solid var(--main-color) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.overlay-switch-btn:hover {
+    background: var(--main-color) !important;
+    color: #1c2434 !important;
+}
+
+/* ==========================================================================
+   6. الأنميشن والحركة التبادلية للكمبيوتر (Desktop Panel Toggling)
+   ========================================================================== */
+
+/* --- الحالة الأولى: إنشاء الحساب نشط --- */
+.auth-container.right-panel-active .sign-in-container {
+    transform: translateX(-100%);
+    opacity: 0;
+    z-index: 1;
+}
+.auth-container.right-panel-active .sign-up-container {
+    transform: translateX(-100%);
+    opacity: 1;
+    z-index: 5;
+}
+.auth-container.right-panel-active .overlay-container {
+    transform: translateX(100%);
+}
+.auth-container.right-panel-active .overlay-right { display: none; }
+.auth-container.right-panel-active .overlay-left { display: flex; }
+.auth-container.right-panel-active .overlay-forgot { display: none; }
+
+/* --- الحالة الثانية: استعادة كلمة المرور نشطة --- */
+.auth-container.forgot-panel-active .sign-in-container {
+    transform: translateX(-100%);
+    opacity: 0;
+    z-index: 1;
+}
+.auth-container.forgot-panel-active .sign-up-container {
+    opacity: 0;
+    z-index: 1;
+}
+.auth-container.forgot-panel-active .forgot-container {
+    transform: translateX(-100%);
+    opacity: 1;
+    z-index: 5;
+}
+.auth-container.forgot-panel-active .overlay-container {
+    transform: translateX(100%);
+}
+.auth-container.forgot-panel-active .overlay-right { display: none; }
+.auth-container.forgot-panel-active .overlay-left { display: none; }
+.auth-container.forgot-panel-active .overlay-forgot { display: flex; }
+
+/* ==========================================================================
+   7. إضافات منظومة الأمان والخطوات لاستعادة الحساب (OTP System)
+   ========================================================================== */
+
+/* إخفاء الخطوات غير النشطة */
+.forgot-step.d-none {
+    display: none !important;
+}
+
+/* تحسين حركة تبديل خطوات الـ OTP */
+.forgot-step {
+    animation: fadeInStep 0.4s ease-out forwards;
+    width: 100%;
+}
+
+@keyframes fadeInStep {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* إدخال كود الـ OTP في منتصف الخانة وباتجاه LTR للأرقام */
+#otpCode {
+    letter-spacing: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    direction: ltr;
+}
+
+/* تنظيف الهياكل القديمة إن وجدت */
+.social-login-wrapper, .social-btns {
+    display: none !important;
+}
+
+/* ==========================================================================
+   8. التجاوب الكامل مع الشاشات الصغيرة والهواتف المحمولة (Responsive Mobile Styles)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .auth-section-wrapper {
+        padding-top: 80px;
+        padding-bottom: 30px;
+        align-items: flex-start;
+    }
+
+    .auth-container {
+        width: 100%;
+        max-width: 100%;
+        min-height: 520px;
+        border-radius: 16px;
+        margin: 0 10px;
+    }
+
+    /* إخفاء غطاء الأوفرلاي بالكامل في الشاشات الصغيرة لتجنب حجب المحتوى */
+    .overlay-container {
+        display: none !important;
+    }
+
+    /* توسيع كل لوحة لتأخذ 100% من العرض بدلاً من 50% */
+    .form-container {
+        width: 100% !important;
+        right: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    form {
+        padding: 25px 20px;
+    }
+
+    /* 1. الحالة الافتراضية للموبايل: تسجيل الدخول */
+    .sign-in-container {
+        opacity: 1;
+        z-index: 5;
+        visibility: visible;
+    }
+
+    .sign-up-container,
+    .forgot-container {
+        opacity: 0;
+        z-index: 1;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    /* 2. حالة إنشاء حساب جديد على الموبايل */
+    .auth-container.mobile-slide-active .sign-in-container {
+        opacity: 0;
+        z-index: 1;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .auth-container.mobile-slide-active .sign-up-container {
+        opacity: 1;
+        z-index: 5;
+        visibility: visible;
+        pointer-events: auto;
+        animation: slideInMobile 0.4s ease-out forwards;
+    }
+
+    /* 3. حالة نسيت كلمة المرور على الموبايل */
+    .auth-container.forgot-panel-active .sign-in-container,
+    .auth-container.forgot-panel-active .sign-up-container {
+        opacity: 0 !important;
+        z-index: 1 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    .auth-container.forgot-panel-active .forgot-container {
+        opacity: 1 !important;
+        z-index: 5 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        animation: slideInMobile 0.4s ease-out forwards;
+    }
+}
+
+/* حركة دخول حركية سلسة للوحات الموبايل */
+@keyframes slideInMobile {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

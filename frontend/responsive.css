@@ -1,0 +1,349 @@
+/* ==========================================================================
+   تنسيقات وإصلاحات التجاوب الشاملة (الموبايل والتابلت)
+   ========================================================================== */
+
+/* 🟢 أجهزة التابلت والشاشات المتوسطة (769px إلى 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        width: 92%;
+    }
+    .landing-text h1 {
+        font-size: 35px;
+    }
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    .streak-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* 🟡 أجهزة الموبايل والشاشات العادية (768px وأقل) */
+@media screen and (max-width: 768px) {
+    
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* الهيدر والقائمة الجانبية */
+    nav .logo .logoImage {
+        width: 140px; 
+    }
+    nav .nav-links { 
+        width: 80%; 
+    }
+
+    /* اللاندينج */
+    .landing {
+        padding-top: 100px;
+        padding-bottom: 30px;
+        min-height: auto !important;
+        text-align: center;
+    }
+    .landing .container {
+        flex-direction: column-reverse; 
+        gap: 20px;
+    }
+    .landing-text h1 {
+        font-size: 26px;
+        line-height: 1.35;
+        margin-bottom: 12px;
+    }
+    .landing-text p {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+    .landing-image img {
+        max-width: 180px;
+        height: auto;
+    }
+
+    /* الأقسام العامة */
+    .about-section, 
+    .pray-times, 
+    .tracker-section, 
+    .qibla-section, 
+    .videos-section { 
+        padding: 40px 0;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+    }
+    .card {
+        padding: 15px 10px;
+    }
+
+    .azkar-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .azkar-box-content, 
+    .tasbeeh-counter {
+        width: 100%;
+        min-width: unset;
+    }
+    .counter-display {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin: 0 auto;
+    }
+    .tasbeeh-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .tasbeeh-btns button {
+        width: 100%;
+    }
+    .azkar-controls {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .azkar-controls button {
+        flex: 1;
+    }
+
+    .challenge-intro h2 {
+        font-size: 20px;
+    }
+    .btn-download {
+        width: 100%;
+        max-width: 280px; 
+        margin: 0 auto;
+        font-size: 15px;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+    .quran-container { 
+        height: 320px; 
+    }
+    .reels-container {
+        margin-top: 25px;
+    }
+
+    .contact-section {
+        padding: 40px 0 20px 0;
+    }
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .channels-grid, 
+    .contact-info {
+        width: 100%;
+    }
+    .contact-info {
+        padding: 25px 15px;
+        border-right: none;
+        border-top: 4px solid var(--main-color, #10b981); 
+    }
+
+    .dashboard-section {
+        padding: 80px 10px 40px;
+    }
+    .dashboard-welcome h2 {
+        font-size: 22px;
+    }
+    .dashboard-welcome p {
+        font-size: 14px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+    .db-card {
+        padding: 16px;
+    }
+    .streak-wrapper {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .streak-info {
+        justify-content: center;
+    }
+    .challenge-grid-30 {
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 6px;
+    }
+    .challenge-day-box, .day-box {
+        font-size: 12px;
+        padding: 8px 4px;
+    }
+    .pdf-info-box {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .pdf-info-box button {
+        width: 100%;
+    }
+
+    /* ⚡⚡ إصلاح شاشة الدخول والتسجيل ونسيت كلمة المرور للموبايل ⚡⚡ */
+    .overlay-container { 
+        display: none !important; 
+    }
+    
+    .form-container {
+        width: 100% !important;
+        position: absolute;
+        top: 0; 
+        right: 0;
+        left: 0;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    /* 1. الحالة الافتراضية (تسجيل الدخول فقط الظاهر) */
+    .sign-in-container { 
+        display: block !important; 
+        opacity: 1 !important; 
+        z-index: 5 !important; 
+        position: relative;
+    }
+
+    .sign-up-container,
+    .forgot-container {
+        display: none !important;
+        opacity: 0 !important;
+        z-index: 1 !important;
+    }
+
+    /* 2. حالة تفعيل إنشاء حساب */
+    .auth-container.mobile-slide-active .sign-in-container,
+    .auth-container.mobile-slide-active .forgot-container {
+        display: none !important;
+    }
+
+    .auth-container.mobile-slide-active .sign-up-container {
+        display: block !important;
+        opacity: 1 !important;
+        z-index: 10 !important;
+        animation: slideInMobile 0.3s ease forwards;
+    }
+
+    /* 3. حالة تفعيل نسيت كلمة المرور */
+    .auth-container.forgot-panel-active .sign-in-container,
+    .auth-container.forgot-panel-active .sign-up-container {
+        display: none !important;
+    }
+
+    .auth-container.forgot-panel-active .forgot-container {
+        display: block !important;
+        opacity: 1 !important;
+        z-index: 10 !important;
+        position: relative;
+        animation: slideInMobile 0.3s ease forwards;
+    }
+
+    /* أزرار التنقل للموبايل */
+    .mobile-only-btn { 
+        display: block !important; 
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background-color: transparent;
+        border: 1px solid #cbd5e1;
+        color: #64748b;
+        border-radius: 10px;
+        font-family: inherit;
+        font-weight: bold;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 20 !important;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-only-btn:active {
+        background-color: #f1f5f9;
+        transform: scale(0.98);
+    }
+}
+
+/* 🟠 الشاشات أقل من 600px */
+@media screen and (max-width: 600px) {
+    .reels-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px;
+    }
+    .challenge-grid-30 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* 🔴 الهواتف الصغيرة جداً (380px وأقل) */
+@media screen and (max-width: 380px) {
+    .landing-text h1 {
+        font-size: 22px;
+    }
+    .cards-container {
+        grid-template-columns: 1fr; 
+    }
+    .counter-display {
+        width: 90px;
+        height: 90px;
+        font-size: 24px;
+    }
+    nav .nav-links {
+        width: 100% !important; 
+    }
+    .challenge-grid-30 {
+        grid-template-columns: repeat(4, 1fr); 
+    }
+}
+
+/* 🟣 استعادة كلمة المرور للموبايل */
+@media screen and (max-width: 480px) {
+    .forgot-box {
+        padding: 20px 12px;
+        box-shadow: none; 
+        background: transparent; 
+    }
+    .forgot-box h2 {
+        font-size: 18px;
+    }
+    .forgot-box p {
+        font-size: 13px;
+    }
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .forgot-box {
+        max-width: 380px;
+        padding: 30px;
+    }
+}
+
+/* أنميشن الانتقال */
+@keyframes slideInMobile {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المحتوى - العالم الإسلامي</title>
+    <link rel="icon" href="imgs/logo-icon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f4f6f9; padding: 40px; margin: 0; }
+        h1, h2, h3, label {
+    font-family: 'Reem Kufi', sans-serif;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+/* العنوان الرئيسي في اللاندينج */
+
+
+/* عناوين الأقسام (مثل: مواقيت الصلاة، الأذكار) */
+
+/* باقي النصوص خليها زي ما هي */
+body, p, span, a {
+    font-family: 'Cairo', sans-serif;
+}
+        .admin-box { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: 'Cairo'; }
+        button { width: 100%; padding: 12px; background-color: #5ebbdf; color: white; border: none; border-radius: 5px; font-family: 'Reem Kufi', sans-serif; font-size: 16px; cursor: pointer; font-weight: bold; transition: 0.2s ease-in-out;}
+        button:hover { background-color: #6cd5ff; transform: scale(1.025); }
+    </style>
+</head>
+<body>
+
+<div class="admin-box">
+    <h2>🚀 لوحة إضافة الفيديوهات للموقع</h2>
+    <form id="addVideoForm">
+        <div class="form-group">
+            <label>نوع الفيديو:</label>
+            <select id="videoType">
+                <option value="mainVideos">فيديو رئيسي (Main Video)</option>
+                <option value="reels">فيديو قصير (Reel / Short)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>كود الفيديو (YouTube Video ID):</label>
+            <input type="text" id="videoId" placeholder="مثال: dQw4w9WgXcQ" required>
+        </div>
+        <div class="form-group">
+            <label>عنوان الفيديو:</label>
+            <input type="text" id="videoTitle" placeholder="اكتب عنواناً جذاباً..." required>
+        </div>
+        <div class="form-group">
+            <label>وصف الفيديو (اختياري):</label>
+            <textarea id="videoDesc" rows="3" placeholder="اكتب وصفاً أو نبذة عن الفيديو..."></textarea>
+        </div>
+        <button type="submit">إضافة الفيديو الآن ✨</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('addVideoForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const type = document.getElementById('videoType').value;
+        const id = document.getElementById('videoId').value;
+        const title = document.getElementById('videoTitle').value;
+        const description = document.getElementById('videoDesc').value;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/videos/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type, id, title, description })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert('🎉 ' + data.message);
+                document.getElementById('addVideoForm').reset();
+            } else {
+                alert('⚠️ ' + data.message);
+            }
+        } catch (error) {
+            alert('❌ فشل الاتصال بالسيرفر!');
+        }
+    });
+</script>
+</body>
+</html>

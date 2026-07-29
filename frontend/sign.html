@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الحساب | العالم الإسلامي</title>
+    
+    <!-- الأيقونات وملفات التنسيق -->
+    <link rel="icon" href="imgs/logo-icon.jpg">
+    <link rel="stylesheet" href="sign-style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <!-- خطوط جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- الشاشة الافتتاحية (Loader) -->
+    <div id="loader-wrapper">
+        <div class="loader-content">
+            <img src="imgs/logo-center.png" alt="Logo" class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- الهيدر وشريط التنقل -->
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="imgs/logo-header.png" class="logoImage" alt="Logo"></a>
+                </div>
+                <div class="nav-controls">
+                    <div id="darkModeBtn" class="dark-mode-toggle" style="cursor: pointer; padding: 10px;">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- حاوية نماذج تسجيل الدخول والحساب -->
+    <section class="auth-section-wrapper">
+        <div class="auth-container" id="authContainer">
+            
+            <!-- 1. نموذج تسجيل الدخول -->
+            <div class="form-container sign-in-container" id="signInContainer">
+                <form id="signInForm" onsubmit="return false;">
+                    <div class="auth-logo-icon"><i class="fa-solid fa-mosque"></i></div>
+                    <h2>تسجيل الدخول</h2>
+                    <p class="subtitle">مرحباً بك مجدداً في منصة العالم الإسلامي</p>
+                    
+                    <div class="input-group">
+                        <input type="email" id="loginEmail" required placeholder=" ">
+                        <label for="loginEmail">البريد الإلكتروني</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" required placeholder=" ">
+                        <label for="loginPassword">كلمة المرور</label>
+                    </div>
+                    
+                    <a style="cursor: pointer;" class="forget-password" id="linkForgotPassword">هل نسيت كلمة المرور؟</a>
+                    
+                    <button type="submit" class="main-btn auth-submit-btn">دخول للمنصة</button>
+                    
+                    <button type="button" class="sub-btn mobile-only-btn" id="toSignUpMobile">ليس لديك حساب؟ سجل الآن</button>
+                </form>
+            </div>
+
+            <!-- 2. نموذج إنشاء حساب جديد -->
+            <div class="form-container sign-up-container" id="signUpContainer">
+                <form id="signUpForm" onsubmit="return false;">
+                    <div class="auth-logo-icon"><i class="fa-solid fa-star-and-crescent"></i></div>
+                    <h2>إنشاء حساب</h2>
+                    <p class="subtitle">انضم إلينا وتابع تحدياتك وأورادك اليومية</p>
+                    
+                    <div class="input-group">
+                        <input type="text" id="regName" required placeholder=" ">
+                        <label for="regName">الاسم الكامل</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="regEmail" required placeholder=" ">
+                        <label for="regEmail">البريد الإلكتروني</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="regPassword" required placeholder=" ">
+                        <label for="regPassword">كلمة المرور</label>
+                    </div>
+                    
+                    <button type="submit" class="main-btn auth-submit-btn">تسجيل الانضمام</button>
+
+                    <button type="button" class="sub-btn mobile-only-btn" id="toSignInMobile">لديك حساب بالفعل؟ دخول</button>
+                </form>
+            </div>
+
+            <!-- 3. نموذج استعادة كلمة المرور (OTP) -->
+            <div class="form-container forgot-container">
+                <form id="forgotPasswordForm" onsubmit="return false;">
+                    <div class="auth-logo-icon"><i class="fas fa-mosque"></i></div>
+                    <h2 id="forgotTitle">استعادة الحساب</h2>
+                    <p class="subtitle" id="forgotSubtitle">أدخل بريدك الإلكتروني لإرسال رمز التحقق (OTP)</p>
+            
+                    <!-- خطوة 1: أدخل البريد -->
+                    <div id="step-email" class="forgot-step">
+                        <div class="input-group">
+                            <input type="email" id="forgotEmail" placeholder=" " required>
+                            <label for="forgotEmail">البريد الإلكتروني</label>
+                        </div>
+                        <button type="button" id="btnSendOTP" class="auth-submit-btn">إرسال رمز التحقق الـ OTP ✉️</button>
+                    </div>
+            
+                    <!-- خطوة 2: أدخل الكود -->
+                    <div id="step-otp" class="forgot-step d-none">
+                        <div class="input-group">
+                            <input type="text" id="otpCode" maxlength="6" placeholder=" " required>
+                            <label for="otpCode">رمز التحقق (6 أرقام)</label>
+                        </div>
+                        <button type="button" id="btnVerifyOTP" class="auth-submit-btn">التحقق من الرمز 🔑</button>
+                    </div>
+            
+                    <!-- خطوة 3: تعيين كلمة المرور -->
+                    <div id="step-reset" class="forgot-step d-none">
+                        <div class="input-group">
+                            <input type="password" id="newPassword" placeholder=" " required>
+                            <label for="newPassword">كلمة المرور الجديدة</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="confirmNewPassword" placeholder=" " required>
+                            <label for="confirmNewPassword">تأكيد كلمة المرور</label>
+                        </div>
+                        <button type="button" id="btnSaveNewPassword" class="auth-submit-btn">حفظ كلمة المرور الجديدة 💾</button>
+                    </div>
+            
+                    <!-- زر العودة للشاشات الصغيرة -->
+                    <button type="button" id="forgotToSignInMobile" class="mobile-only-btn">العودة لتسجيل الدخول</button>
+                </form>
+            </div>
+
+            <!-- اللوحة التفاعلية المتحركة (Overlay Desktop) -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h3>أهلاً بك يا بطل!</h3>
+                        <p>سجل معنا الآن لتتمكن من تتبع تحدي الـ 30 يوماً وحفظ إحصائياتك اليومية.</p>
+                        <button class="overlay-switch-btn" id="signUpBtn">إنشاء حساب</button>
+                    </div>
+                    <div class="overlay-panel overlay-left">
+                        <h3>لديك حساب بالفعل؟</h3>
+                        <p>قم بتسجيل الدخول لمتابعة أورادك، تحدياتك الإيمانية، ونشاطاتك التفاعلية.</p>
+                        <button class="overlay-switch-btn" id="signInBtn">تسجيل الدخول</button>
+                    </div>
+                    <div class="overlay-panel overlay-forgot">
+                        <h3>تذكرت كلمة المرور؟</h3>
+                        <p>لا تقلق، يمكنك العودة فوراً وتجربة تسجيل الدخول بحسابك بشكل طبيعي.</p>
+                        <button class="overlay-switch-btn" id="backToSignInFromForgotBtn">العودة للدخول</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-sponsor">
+                    <span>برعاية</span>
+                    <div class="sponsor-logos">
+                        <img src="imgs/the-ux-logo.png" alt="Sponsor">
+                    </div>
+                </div>
+                <hr class="footer-line">
+                <p class="copyrights">
+                    جميع الحقوق محفوظة &copy; 2026 | العالم الإسلامي
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- البرمجيات -->
+    <script src="sign-script.js"></script>
+    <script src="script.js"></script>
+    <script src="internet-script.js"></script>
+</body>
+</html>

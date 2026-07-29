@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الإيمانية - العالم الاسلامي</title>
+    <link rel="icon" href="imgs/logo-icon.jpg">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- دمج خطوط جوجل لتحسين سرعة التحميل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- ملفات التنسيق CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <!-- الهيدر وشريط التنقل -->
+    <header>
+        <nav>
+            <div class="container">
+                <!-- تجميع اللوجو مع العنوان لضبط المحاذاة -->
+                <div class="logo-wrapper" style="display: flex; align-items: center; gap: 15px;">
+                    <div class="logo">
+                        <a href="index.html"><img src="imgs/logo-header.png" class="logoImage" alt="Logo"></a>
+                    </div>
+                    <h2 style="color: #ecf0f1; font-family: 'Reem Kufi', sans-serif; font-size: 1.2rem; margin: 0;">لوحتي الإيمانية</h2>
+                </div>
+
+                <div class="nav-controls" style="display: flex; align-items: center; gap: 10px;">
+                    <div id="darkModeBtn" class="dark-mode-toggle" style="cursor: pointer; padding: 10px;">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <!-- رابط تسجيل الخروج ينقل لصفحة التسجيل sign.html -->
+                    <a href="sign.html" class="main-btn" id="logout-btn" style="background: #e74c3c !important; font-size: 14px; padding: 8px 15px;">تسجيل الخروج</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="container">
+            
+            <!-- رسالة الترحيب -->
+            <div class="dashboard-welcome">
+                <h2>مرحباً بك، <span id="username-display">يوسف ربيع</span> ✨</h2>
+                <p>مرحباً بك في مساحتك الروحية الخاصة لتتبع عباداتك وتطوير ذاتك.</p>
+            </div>
+
+            <!-- الـ Streak (سلسلة الالتزام) -->
+            <div class="streak-wrapper">
+                <div class="streak-info">
+                    <div class="streak-icon" id="streak-fire">🔥</div>
+                    <div>
+                        <p style="margin: 0; font-size: 13px; color: #bbb;">سلسلة الالتزام المتوالي</p>
+                        <span class="streak-num" id="streak-count">0</span> يوماً متتالياً
+                    </div>
+                </div>
+                <p class="streak-status-text" id="streak-message">أتمم جميع عباداتك اليوم لتبدأ السلسلة أو تحافظ عليها!</p>
+            </div>
+
+            <!-- الشبكة الرئيسية -->
+            <div class="dashboard-grid">
+
+                <!-- 1. متابعة الورد اليومي -->
+                <div class="db-card">
+                    <div class="db-card-title">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>الورد والالتزام اليومي</span>
+                    </div>
+                    <div class="prayer-checklist">
+                        <label class="check-item">
+                            <div class="check-item-right">
+                                <input type="checkbox" class="habit-checkbox" id="habit-fajr" data-habit="fajr">
+                                <span>صلاة الفجر في وقتها</span>
+                            </div>
+                        </label>
+                        <label class="check-item">
+                            <div class="check-item-right">
+                                <input type="checkbox" class="habit-checkbox" id="habit-prayers" data-habit="prayers">
+                                <span>باقي الصلوات الخمس المفروضة</span>
+                            </div>
+                        </label>
+                        <label class="check-item">
+                            <div class="check-item-right">
+                                <input type="checkbox" class="habit-checkbox" id="habit-azkar" data-habit="azkar">
+                                <span>أذكار الصباح والمساء</span>
+                            </div>
+                        </label>
+                        
+                        <div class="quran-target-wrapper">
+                            <div class="quran-setup" id="quran-setup-view">
+                                <p style="font-size: 14px; margin-bottom: 8px; font-weight: bold;">تحديد الورد القرآني لليوم:</p>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="number" id="quran-pages-input" min="1" placeholder="عدد الصفحات..." style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--secondary-color); font-family: 'Cairo';">
+                                    <button type="button" class="sub-btn" id="save-quran-target" style="margin: 0; padding: 8px 15px;">تأكيد</button>
+                                </div>
+                            </div>
+                            
+                            <div class="quran-progress-active hidden" id="quran-progress-view">
+                                <label class="check-item">
+                                    <div class="check-item-right">
+                                        <input type="checkbox" class="habit-checkbox" id="habit-quran" data-habit="quran">
+                                        <span>قراءة الورد القرآني اليومي (<span id="user-target-text">0</span> صفحات)</span>
+                                    </div>
+                                    <button type="button" id="reset-quran-target" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 12px;"><i class="fa-solid fa-pen"></i> تعديل</button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="db-progress-wrapper">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                            <span>نسبة إنجاز اليوم</span>
+                            <span id="progress-text">0%</span>
+                        </div>
+                        <div class="db-progress-bar">
+                            <div class="db-progress-fill" id="daily-progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. الزاد اليومي المتجدد -->
+                <div class="db-card">
+                    <div class="db-card-title">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <span>الزاد الإيماني لليوم</span>
+                    </div>
+                    <div class="daily-wisdom-box">
+                        <!-- الآية -->
+                        <div class="wisdom-item">
+                            <p class="wisdom-title"><i class="fa-solid fa-quran"></i> آية اليوم:</p>
+                            <p class="daily-wisdom-text" id="daily-verse">جاري التحميل...</p>
+                            <span class="wisdom-source" id="daily-surah"></span>
+                        </div>
+                        <hr class="wisdom-divider">
+                        <!-- الحديث -->
+                        <div class="wisdom-item">
+                            <p class="wisdom-title"><i class="fa-solid fa-kaaba"></i> حديث اليوم:</p>
+                            <p class="daily-wisdom-text" id="daily-hadith">جاري التحميل...</p>
+                            <span class="wisdom-source" id="daily-hadith-source"></span>
+                        </div>
+                        <hr class="wisdom-divider">
+                        <!-- حكمة الأثر -->
+                        <div class="wisdom-item">
+                            <p class="wisdom-title"><i class="fa-solid fa-scroll"></i> من أثر السلف:</p>
+                            <p class="daily-wisdom-text" id="daily-quote">جاري التحميل...</p>
+                            <span class="wisdom-source" id="daily-quote-source"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. تحدي الـ 30 يوماً والشهادة -->
+                <div class="db-card">
+                    <div class="db-card-title">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>تحدي الـ 30 يوماً والشهادة</span>
+                    </div>
+
+                    <div class="pdf-upload-wrapper">
+                        <h4><i class="fa-solid fa-file-pdf"></i> رفع ملف التحدي للحصول على الشهادة</h4>
+                        <p style="font-size: 12px; color: var(--text-color); margin-bottom: 10px;">ارفع تقريرك بصيغة PDF بعد إتمام التحدي للتحقق وإصدار الشهادة:</p>
+                        
+                        <div class="file-drop-zone" id="drop-zone">
+                            <input type="file" id="pdf-file-input" accept=".pdf" class="file-input-hidden">
+                            <label for="pdf-file-input" class="file-label">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <span>اختر ملف PDF أو اسحبه هنا</span>
+                            </label>
+                        </div>
+
+                        <div id="pdf-file-info" class="pdf-info-box hidden">
+                            <div class="pdf-file-details">
+                                <i class="fa-solid fa-file-pdf pdf-icon"></i>
+                                <span id="pdf-file-name">filename.pdf</span>
+                            </div>
+                            <button type="button" id="upload-pdf-btn" class="main-btn" style="padding: 6px 15px; font-size: 12px;">إرسال للشهادة</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 4. حصن المسلم والسبحة الإلكترونية -->
+            <section class="azkar-section reveal" id="azkar" style="margin-top: 30px;">
+                <div class="container">
+                    <h2 class="section-title">حصن المسلم والسبحة</h2>
+                    
+                    <div class="azkar-selector-wrapper">
+                        <label for="azkarCategory" style="display:block; margin-bottom:10px; font-weight:bold;">اختر الفئة:</label>
+                        <select id="azkarCategory" class="azkar-select">
+                            <option value="tasbeeh">تسبيح عام</option>
+                            <option value="morning">أذكار الصباح</option>
+                            <option value="evening">أذكار المساء</option>
+                            <option value="sleep">أذكار النوم</option>
+                            <option value="distress">أذكار الكرب</option>
+                        </select>
+                    </div>
+            
+                    <div class="azkar-wrapper">
+                        <div class="azkar-box-content">
+                            <p id="currentAzkar">"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ"</p>
+                            <div class="azkar-controls">
+                                <button type="button" class="sub-btn" id="prevAzkarBtn"><i class="fa-solid fa-arrow-right"></i> السابق</button>
+                                <button type="button" class="sub-btn" id="nextAzkarBtn">التالي <i class="fa-solid fa-arrow-left"></i></button>
+                            </div>
+                        </div>
+                        
+                        <!-- العداد المطور للسبحة -->
+                        <div class="tasbeeh-counter">
+                            <div class="counter-display" id="counterNum" title="اضغط للتسبيح" style="cursor: pointer; user-select: none;">0</div>
+                            
+                            <p style="margin-top: 10px;">إجمالي التسبيحات الكلي: <span id="totalTasbeeh" style="font-weight: bold; color: #2ecc71;">0</span></p>
+                            
+                            <div class="tasbeeh-btns" style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                                <button type="button" class="main-btn" id="countBtn">اضغط للتسبيح <i class="fa-solid fa-plus"></i></button>
+                                <button type="button" class="reset-btn" id="resetBtn" style="background: #e67e22; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer;">تصفير الحالي <i class="fa-solid fa-rotate-right"></i></button>
+                                <button type="button" class="reset-total-btn" id="resetTotalBtn" style="background: #e74c3c; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer;">تصفير الكلي <i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+    
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-sponsor">
+                    <span>برعاية</span>
+                    <div class="sponsor-logos">
+                        <img src="imgs/the-ux-logo.png" alt="Sponsor">
+                    </div>
+                </div>
+                <hr class="footer-line">
+                <p class="copyrights">جميع الحقوق محفوظة &copy; 2026 | العالم الإسلامي</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- البرمجيات -->
+    <script src="dashboard-script.js?v=999"></script>
+    <script src="script.js"></script>
+    <script src="internet-script.js"></script>
+</body>
+</html>
