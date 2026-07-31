@@ -1,9 +1,9 @@
 /* ==========================================================================
    ملف التحكم البرمجي لصفحة الدخول وشبكة الإشعارات (المطور الشامل)
-   منصة العالم الإسلامي
+   منصة العالم الإسلامي - متوافق مع Firebase & Vercel
    ========================================================================== */
 
-   document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const BACKEND_URL = window.location.origin;
 
     console.log("🚀 تم تحميل نظام التحكم والإشعارات بنجاح، رابط الباك آند:", BACKEND_URL);
@@ -236,7 +236,7 @@
     });
 
     // ==========================================================================
-    // 3. العمليات والربط الفعلي مع الـ API
+    // 3. العمليات والربط الفعلي مع الـ API و Firebase
     // ==========================================================================
 
     // [أولاً] إنشاء حساب جديد
@@ -289,6 +289,11 @@
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
 
+            if (!email || !password) {
+                showNotification('⚠️ يرجى كتابة البريد الإلكتروني وكلمة المرور.', "error");
+                return;
+            }
+
             if (submitBtn) submitBtn.disabled = true;
 
             try {
@@ -304,7 +309,6 @@
                     showNotification(`✨ تم تسجيل الدخول بنجاح!`, "success");
                     localStorage.setItem('username', data.name);
                     localStorage.setItem('userEmail', data.email);
-                    if (data.token) localStorage.setItem('authToken', data.token);
                     
                     setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
                 } else {
@@ -391,7 +395,7 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    showNotification('🔓 كود صحيح! قم بتعيين الباسورد الجديد.', "success");
+                    showNotification('🔓 كود صحيح! قم بتعيين كلمة المرور الجديدة.', "success");
                     document.getElementById('step-otp').classList.add('d-none');
                     document.getElementById('step-reset').classList.remove('d-none');
                     document.getElementById('forgotTitle').innerText = "كلمة مرور جديدة";
@@ -408,7 +412,7 @@
         });
     }
 
-    // 3. كود تحديث الباسورد الجديد
+    // 3. كود تحديث كلمة المرور الجديدة
     if (forgotPasswordForm) {
         forgotPasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
