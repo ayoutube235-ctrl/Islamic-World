@@ -8,15 +8,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ==========================================================================
-// 1. تهيئة Firebase Admin SDK (بديل الـ JSON)
+// 1. تهيئة Firebase Admin SDK
 // ==========================================================================
-// تهيئة Firebase Admin مع معالجة الأسطر الجديدة للمفتاح الخاص في Vercel
 if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert({
             projectId: process.env.FIREBASE_PROJECT_ID,
             clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-            // التعديل المهم هنا: استبدال \\n بـ \n لتفادي خطأ Vercel
             privateKey: process.env.FIREBASE_PRIVATE_KEY 
                 ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') 
                 : undefined,
@@ -111,11 +109,42 @@ app.post(['/signup', '/api/signup'], async (req, res) => {
     }
 });
 
-// ب. مسار تسجيل الدخول والتحقق (Sign In)
+// ب. مسار تسجيل الدخول والتحقق (Sign In) - [تم التحديث والربط مع Firebase Auth API]
 app.post(['/signin', '/api/signin'], async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email, password } = req.body;
 
+        // 1. التحقق من وجود الإيميل وكلمة المرور في الطلب
+        if (!email || !password) {
+            return res.status(400).json({ success: false, message: 'يرجى إدخال البريد الإلكتروني وكلمة المرور!' });
+        }
+
+        // 2. التحقق من صحة كلمة المرور والبريد عبر Firebase REST API
+        const firebaseApiKey = process.env.FIREBASE_API_KEY;
+
+        if (firebaseApiKey) {
+            const authResponse = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseApiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    returnSecureToken: true
+                })
+            });
+
+            const authData = await authResponse.json();
+
+            // إذا كان البريد أو كلمة المرور خاطئة في Firebase Auth
+            if (!authResponse.ok || authData.error) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'خطأ في البريد الإلكتروني أو كلمة المرور!' 
+                });
+            }
+        }
+
+        // 3. جلب بيانات المستخدم من Firestore
         const userDoc = await USERS_COLLECTION.doc(email).get();
 
         if (!userDoc.exists) {
@@ -129,6 +158,7 @@ app.post(['/signin', '/api/signin'], async (req, res) => {
             email: userData.email, 
             message: 'تم تسجيل الدخول بنجاح!' 
         });
+
     } catch (error) {
         console.error("خطأ في تسجيل الدخول:", error);
         return res.status(500).json({ success: false, message: 'حدث خطأ داخلي في السيرفر' });
