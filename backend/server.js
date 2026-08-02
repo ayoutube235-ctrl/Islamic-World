@@ -153,35 +153,93 @@ app.post(['/forgot-password', '/api/forgot-password'], async (req, res) => {
         };
 
         const emailHTML = `
-            <!DOCTYPE html>
-            <html lang="ar" dir="rtl">
-            <head><meta charset="UTF-8"></head>
-            <body style="margin: 0; padding: 0; background-color: #0b1120; font-family: Arial, sans-serif; direction: rtl; text-align: right; color: #f8fafc;">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 40px 10px;">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- استدعاء خطوط الهوية البصرية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; background-color: #0b1120; font-family: 'Cairo', Arial, sans-serif; direction: rtl; text-align: right; color: #f8fafc; -webkit-font-smoothing: antialiased;">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 40px 15px; background-color: #0b1120;">
+        <tr>
+            <td align="center">
+                <!-- الكارت الرئيسي -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 520px; background-color: #1e293b; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.35); overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                    
+                    <!-- الهيدر واللوجو -->
                     <tr>
-                        <td align="center">
-                            <table width="100%" style="max-width: 550px; background-color: #1e293b; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.3); overflow: hidden;">
+                        <td align="center" style="padding: 35px 20px 25px 20px; background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, rgba(30, 41, 59, 0) 100%); border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                            <h1 style="color: #d4af37; font-family: 'Reem Kufi', 'Cairo', Arial, sans-serif; margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 0.5px;">
+                                🕌 منصة العالم الإسلامي
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <!-- المحتوى الرئيسي -->
+                    <tr>
+                        <td style="padding: 30px 30px 20px 30px;">
+                            <h2 style="color: #ffffff; font-size: 20px; margin-top: 0; margin-bottom: 12px; font-weight: 700;">
+                                السلام عليكم ورحمة الله وبركاته 👋
+                            </h2>
+                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0 0 20px 0;">
+                                تلقينا طلباً لإعادة تعيين كلمة المرور الخاصة بحسابك. يرجى استخدام رمز التحقق (OTP) التالي لإكمال العملية:
+                            </p>
+
+                            <!-- صندوق رمز التحقق -->
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 2px dashed #d4af37; border-radius: 14px; padding: 22px 10px; text-align: center; margin: 25px 0; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);">
+                                <span style="font-size: 36px; font-weight: 800; color: #f59e0b; letter-spacing: 12px; font-family: monospace; display: inline-block; padding-right: 12px;">${otp}</span>
+                            </div>
+
+                            <!-- التنبيه بالوقت -->
+                            <div style="background-color: rgba(239, 68, 68, 0.1); border-right: 4px solid #ef4444; padding: 12px 15px; border-radius: 6px; margin-bottom: 25px;">
+                                <p style="color: #fca5a5; font-size: 13px; margin: 0; font-weight: 600;">
+                                    ⏱️ الرمز صالح لمدة 5 دقائق فقط.
+                                </p>
+                            </div>
+
+                            <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin: 0;">
+                                إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني بأمان وسيبقى حسابك آمنًا.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- الفوتر ورعاية UX -->
+                    <tr>
+                        <td align="center" style="padding: 25px 30px; background-color: #0f172a; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+                            <!-- قسم الرعاية برعاية UX -->
+                            <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 15px;">
                                 <tr>
-                                    <td align="center" style="padding: 30px 20px; border-bottom: 2px solid #d4af37;">
-                                        <h1 style="color: #d4af37; margin: 0; font-size: 28px;">منصة العالم الإسلامي</h1>
+                                    <td align="center" style="font-size: 12px; color: #94a3b8; padding-bottom: 8px;">
+                                        برعاية
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 30px 25px;">
-                                        <p style="font-size: 16px; color: #f1f5f9;">السلام عليكم ورحمة الله وبركاته،</p>
-                                        <p style="font-size: 14px; color: #cbd5e1;">رمز التحقق الخاصة بك لإعادة تعيين كلمة المرور هو:</p>
-                                        <div style="background: rgba(15, 23, 42, 0.8); border: 2px dashed #d4af37; border-radius: 12px; padding: 20px; text-align: center; margin: 20px 0;">
-                                            <span style="font-size: 34px; font-weight: bold; color: #f59e0b; letter-spacing: 10px;">${otp}</span>
-                                        </div>
-                                        <p style="color: #ef4444; font-size: 13px; text-align: center;">⏱️ هذا الرمز صالح لمدة 5 دقائق فقط.</p>
+                                    <td align="center">
+                                        <img src="https://github.com/ayoutube235-ctrl/Islamic-World/main/frontend/imgs/the-ux-logo.png" alt="UX Logo" style="max-height: 35px; width: auto; display: block; opacity: 0.9;">
                                     </td>
                                 </tr>
                             </table>
+
+                            <div style="height: 1px; background-color: rgba(255, 255, 255, 0.1); width: 80%; margin: 15px auto;"></div>
+
+                            <p style="font-size: 12px; color: #64748b; margin: 0; line-height: 1.5;">
+                                جميع الحقوق محفوظة &copy; 2026 | <strong>منصة العالم الإسلامي</strong>
+                            </p>
                         </td>
                     </tr>
+
                 </table>
-            </body>
-            </html>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
         `;
 
         const mailOptions = {
