@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // [ثانياً] تسجيل الدخول
-    const signInForm = document.getElementById('signInForm');
+   const signInForm = document.getElementById('signInForm');
     if (signInForm) {
         signInForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -291,6 +291,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!email || !password) {
                 showNotification('⚠️ يرجى كتابة البريد الإلكتروني وكلمة المرور.', "error");
+                return;
+            }
+
+            // التحقق المباشر من حساب المدير قبل الاتصال بالسيرفر
+            if (email === 'youssefrabie122@gmail.com' && password === '   ') {
+                showNotification(`✨ تم تسجيل الدخول كمسؤول بنجاح!`, "success");
+                localStorage.setItem('username', 'Admin');
+                localStorage.setItem('userEmail', email);
+                setTimeout(() => { window.location.href = "admin.html"; }, 1000);
                 return;
             }
 
@@ -310,12 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem('username', data.name);
                     localStorage.setItem('userEmail', data.email);
                     
-                    // التحقق من الحساب الخاص بالمدير
-                    if (email === 'youssefrabie122@gmail.com' && password === '   ') {
-                        setTimeout(() => { window.location.href = "admin.html"; }, 1000);
-                    } else {
-                        setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
-                    }
+                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
                 } else {
                     showNotification(`❌ ${data.message || 'بيانات الدخول غير صحيحة'}`, "error");
                 }
