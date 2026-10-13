@@ -20,25 +20,5 @@
       "tasbeehCurrent": 0,
       "tasbeehTotal": 0
     }
-  },
-  {
-    "id": 1783601570508,
-    "name": "يوسف ربيع",
-    "email": "youssefrabie122@gmail.com",
-    "password": "Youssef1234#",
-    "religiousData": {
-      "streak": 0,
-      "lastCompletedDate": null,
-      "quranPageTarget": null,
-      "challenge30Days": [],
-      "totalTasbeeh": 0,
-      "dailyHabits": {
-        "fajr": false,
-        "prayers": false,
-        "azkar": false,
-        "quran": false
-      },
-      "watchedVideos": []
-    }
   }
 ]
