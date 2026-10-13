@@ -310,7 +310,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem('username', data.name);
                     localStorage.setItem('userEmail', data.email);
                     
-                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+                    // التحقق من الحساب الخاص بالمدير
+                    if (email === 'youssefrabie122@gmail.com' && password === '   ') {
+                        setTimeout(() => { window.location.href = "admin.html"; }, 1000);
+                    } else {
+                        setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+                    }
                 } else {
                     showNotification(`❌ ${data.message || 'بيانات الدخول غير صحيحة'}`, "error");
                 }
